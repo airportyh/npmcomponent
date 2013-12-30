@@ -1,0 +1,1 @@
+curl http://50.116.26.197/components/all > all.json

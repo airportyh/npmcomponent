@@ -1,0 +1,16 @@
+{
+  "name": "npm-component",
+  "version": "0.0.0",
+  "description": "Scripts to make component modules available to NPM/Browserify users.",
+  "main": "index.js",
+  "dependencies": {
+    "github": "~0.1.12",
+    "lodash.difference": "~2.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Toby Ho",
+  "license": "MIT"
+}
