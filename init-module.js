@@ -107,4 +107,4 @@ function newGithub(){
   return github
 }
 
-initModule('component', 'collection')
+initModule('component', 'model')

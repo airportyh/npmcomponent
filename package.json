@@ -5,7 +5,9 @@
   "main": "index.js",
   "dependencies": {
     "github": "~0.1.12",
-    "lodash.difference": "~2.4.1"
+    "glob": "~3.2.7",
+    "async": "~0.2.9",
+    "falafel": "~0.3.1"
   },
   "devDependencies": {},
   "scripts": {
