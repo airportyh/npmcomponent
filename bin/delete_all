@@ -1,0 +1,32 @@
+#! /usr/bin/env node
+
+var fs = require('fs')
+var async = require('async')
+var deleteModule = require('../lib/delete_module')
+var assert = require('assert')
+var credentials = require('../credentials.json')
+
+fs.readdir('repos', function(err, entries){
+  if (err) return console.error(err.message)
+  entries = entries.map(function(entry){
+    var idx = entry.indexOf('-')
+    var user = entry.substring(0, idx)
+    var name = entry.substring(idx + 1)
+    assert(user)
+    assert(name)
+    assert.equal(user + '-' + name, entry)
+    return {
+      user: user,
+      name: name
+    }
+  })
+  
+  
+  async.eachSeries(entries, function(entry, next){
+    deleteModule(credentials, entry.user, entry.name, next)
+  }, function(err){
+    if (err) return console.error(err.message)
+    console.log('ok')
+  })
+
+})

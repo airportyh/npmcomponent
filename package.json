@@ -8,7 +8,9 @@
     "glob": "~3.2.7",
     "async": "~0.2.9",
     "falafel": "~0.3.1",
-    "rimraf": "~2.2.5"
+    "rimraf": "~2.2.5",
+    "insist": "~0.2.0",
+    "lodash.find": "~2.4.1"
   },
   "devDependencies": {},
   "scripts": {
