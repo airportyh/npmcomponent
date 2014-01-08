@@ -1,0 +1,29 @@
+#! /usr/bin/env node
+var request = require('request')
+var async = require('async')
+var log = require('npmlog')
+
+var repos = require('../repos.json')
+  .map(function(repo){
+    return repo.replace('/', '-')
+  })
+
+var unavailableNames = []
+async.eachLimit(repos, 50, function(name, next){
+  request.get('http://registry.npmjs.org/' + name, function(err, resp, body){
+    if (err){
+      log.error(name, 'was taken')
+      log.info(name, body)
+      unavailableNames.push(name)
+    }else{
+      log.info(name, 'is available')
+    }
+    next()
+  })
+}, function(err){
+  if (err) log.error(err.message)
+  if (unavailableNames.length > 0){
+    log.error('Names unavailable:')
+    log.info(unavailableNames.join('\n'))
+  }
+})

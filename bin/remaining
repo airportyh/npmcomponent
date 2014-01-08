@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 
 var fs = require('fs')
-var find = require('lodash.find')
 var assert = require('insist')
 var modules = require('../repos.json')
   .map(function(m){
