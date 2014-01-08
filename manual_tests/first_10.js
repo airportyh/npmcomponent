@@ -5,7 +5,7 @@ var credentials = require('../credentials.json')
 var all = require('../all.json')
   .filter(function(pkg){ return pkg })
 
-var first10 = all.slice(0, 500)
+var first10 = all
 
 var GitHubUrlExp = /https:\/\/github\.com\/(.*)$/
 var GitHubRawUrlExp = /https:\/\/raw\.github\.com\/(.*)$/
@@ -30,8 +30,9 @@ var repos = first10
     }
   })
 
+
 async.eachSeries(repos, function(repo, next){
-  sync(credentials, repo.user, repo.name, next)
+  sync(credentials, repo.user, repo.name, true, next)
 }, function(err){
   if (err) return console.error(err.message)
   console.log('Success!')

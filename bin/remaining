@@ -1,0 +1,35 @@
+#! /usr/bin/env node
+
+var fs = require('fs')
+var find = require('lodash.find')
+var assert = require('insist')
+var modules = require('../repos.json')
+  .map(function(m){
+    return {
+      name: m,
+      dirname: m.replace('/', '-').toLowerCase()
+    }
+  })
+
+console.log('# of repos', modules.length)
+
+var entries = fs.readdirSync('repos')
+  .map(function(e){
+    return e.toLowerCase()
+  })
+
+console.log('# of cloned reps', entries.length)
+
+var remaining = []
+modules.forEach(function(module){
+  if (entries.indexOf(module.dirname) === -1){
+    remaining.push(module.name)
+  }
+})
+
+assert(remaining.length === modules.length - entries.length)
+console.log('# of remaining packages:', remaining.length)
+
+fs.writeFileSync('../remaining.json', JSON.stringify(remaining, null, '  '))
+
+console.log('Wrote to remaining.json')

@@ -3,18 +3,39 @@
 var assert = require('assert')
 var sync = require('../lib/sync_module')
 var credentials = require('../credentials.json')
+var async = require('async')
+var log = require('npmlog')
+var arg = process.argv[2]
 
-try{
-  var repo = process.argv[2]
-  var user = repo.split('/')[0]
-  var name = repo.split('/')[1]
-  assert(user)
-  assert(name)
-}catch(e){
-  console.error('Usage: sync <user>/<repo name>')
+if (arg.match(/^[-_a-zA-Z0-9]+\.json$/)){
+  var modules = require('../' + arg)
+  async.eachSeries(modules, function(module, next){
+    syncModule(module, function(err){
+      if (err) log.error('Failed to sync ' + module + ': ' + err.message)
+      next()
+    })
+  }, function(err){
+    if (err) return console.error(err.message)
+    log.info('ok')
+  })
+}else if (arg.match(/^[-_a-zA-Z0-9]+\/[-_a-zA-Z0-9]+$/)){
+  syncModule(arg, function(err){
+    if (err) return console.error(err.message)
+    log.info('ok')
+  })
+}else{
+  log.error('Usage: sync <user>/<repo name>')
   process.exit(1)
 }
-sync(credentials, user, name, function(err){
-  if (err) return console.error(err.message)
-  console.log('ok')
-})
+
+function syncModule(repo, callback){
+  var user = repo.split('/')[0]
+  var name = repo.split('/')[1]
+  try{
+    assert(user)
+    assert(name)
+  }catch(e){
+    return callback(e)
+  }
+  sync(credentials, user, name, false, callback)
+}

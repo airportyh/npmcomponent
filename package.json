@@ -10,7 +10,12 @@
     "falafel": "~0.3.1",
     "rimraf": "~2.2.5",
     "insist": "~0.2.0",
-    "lodash.find": "~2.4.1"
+    "lodash.find": "~2.4.1",
+    "npmlog": "0.0.6",
+    "graceful-fs": "~2.0.1",
+    "lodash.uniq": "~2.4.1",
+    "lodash.difference": "~2.4.1",
+    "lodash.intersection": "~2.4.1"
   },
   "devDependencies": {},
   "scripts": {

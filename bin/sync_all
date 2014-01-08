@@ -1,0 +1,27 @@
+#! /usr/bin/env node
+
+var sync = require('../lib/sync_module')
+var async = require('async')
+var credentials = require('../credentials.json')
+var log = require('npmlog')
+
+var repos = require('../repos.json')
+  .map(function(repo){
+    var parts = repo.split('/')
+    return {
+      user: parts[0],
+      name: parts[1]
+    }
+  })
+
+async.eachSeries(repos, function(repo, next){
+  sync(credentials, repo.user, repo.name, false, function(err){
+    if (err) {
+      log.error('Failed to sync ' + repo.user + '/' + repo.name + ': ' + err.message)
+    }
+    next()
+  })
+}, function(err){
+  if (err) return console.error(err.message)
+  console.log('Success!')
+})

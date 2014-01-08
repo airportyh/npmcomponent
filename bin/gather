@@ -1,0 +1,31 @@
+#! /usr/bin/env node
+
+var fs = require('fs')
+var all = require('../all.json')
+  .filter(function(pkg){ return pkg })
+var _ = require('underscore')
+
+var GitHubUrlExp = /https?:\/\/github\.com\/(.*)?$/
+var GitHubUrlDotGitExp = /https?:\/\/github\.com\/(.*)\.git$/
+var GitHubRawUrlExp = /https?:\/\/raw\.github\.com\/(.*)$/
+
+var repos = all
+  .map(function(pkg){
+    var repo = pkg.repo
+    var m
+    if (m = repo.match(GitHubUrlDotGitExp)){
+      return m[1]
+    }else if (m = repo.match(GitHubUrlExp)){
+      return m[1]
+    }else if (m = repo.match(GitHubRawUrlExp)){
+      return m[1]
+    }else{
+      return repo
+    }
+  })
+
+repos = _.uniq(repos)
+
+repos.sort()
+
+fs.writeFile('repos.json', JSON.stringify(repos, null, '  '))

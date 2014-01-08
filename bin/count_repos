@@ -1,0 +1,27 @@
+#! /usr/bin/env node
+
+var Github = require('../lib/github')
+var credentials = require('../credentials.json')
+
+var github = Github(credentials)
+
+var page = 1
+var count = 0
+function fetch(page){
+  console.log('Fetching page', page)
+  github.repos.getAll({
+    per_page: 100,
+    page: page
+  }, function(err, data){
+    if (err) return console.error(err.message)
+    count += data.length
+    console.log('# of repos counted', count)
+    console.log('One of the repos:', data[0].full_name)
+    if (data.length < 100){
+      console.log('Done.')
+    }else{
+      fetch(page + 1)
+    }
+  })
+}
+fetch(page)
