@@ -33,7 +33,8 @@ console.log('# of remaining packages:', remaining.length)
 
 assert(remaining.length === modules.length - entries.length)
 
-fs.writeFileSync('../remaining.json', JSON.stringify(remaining, null, '  '))
+var output = JSON.stringify(remaining, null, '  ')
+fs.writeFileSync('remaining.json', output)
 
 console.log('Wrote to remaining.json')
 

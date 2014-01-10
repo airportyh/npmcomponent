@@ -13,7 +13,9 @@
     "npmlog": "0.0.6",
     "graceful-fs": "~2.0.1",
     "request": "~2.31.0",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "getargs": "0.0.8",
+    "commander": "~2.1.0"
   },
   "devDependencies": {},
   "scripts": {

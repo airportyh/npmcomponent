@@ -2,22 +2,27 @@
 
 var fs = require('fs')
 var all = require('../all.json')
-  .filter(function(pkg){ return pkg })
 var _ = require('underscore')
 var log = require('npmlog')
 
 var GitHubUrlExp = /https?:\/\/github\.com\/(.*)?$/
 var GitHubUrlDotGitExp = /https?:\/\/github\.com\/(.*)\.git$/
 var GitHubRawUrlExp = /https?:\/\/raw\.github\.com\/(.*)$/
+var RepoExp = /^([^\/]+\/[^\/]+)$/
 
 var repos = []
 
 all.forEach(function(pkg){
+  if (!pkg) return
   var repo = getRepo(pkg)
+  if (!repo) return
   repos.push(repo.toLowerCase())
   if (pkg.dependencies){
     for (var dep in pkg.dependencies){
-      repos.push(dep.toLowerCase())
+      dep = dep.toLowerCase()
+      if (dep.match(RepoExp)){
+        repos.push(dep)
+      }
     }
   }
 })
@@ -38,7 +43,9 @@ function getRepo(pkg){
     return m[1]
   }else if (m = repo.match(GitHubRawUrlExp)){
     return m[1]
+  }else if (m = repo.match(RepoExp)){
+    return m[1]
   }else{
-    return repo
+    return null
   }
 }
