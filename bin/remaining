@@ -1,7 +1,8 @@
 #! /usr/bin/env node
 
 var fs = require('fs')
-var assert = require('insist')
+var assert = require('assert')
+var _ = require('underscore')
 var modules = require('../repos.json')
   .map(function(m){
     return {
@@ -11,6 +12,8 @@ var modules = require('../repos.json')
   })
 
 console.log('# of repos', modules.length)
+
+var modEntries = modules.map(function(m){ return m.dirname })
 
 var entries = fs.readdirSync('repos')
   .map(function(e){
@@ -26,9 +29,21 @@ modules.forEach(function(module){
   }
 })
 
-assert(remaining.length === modules.length - entries.length)
 console.log('# of remaining packages:', remaining.length)
+
+assert(remaining.length === modules.length - entries.length)
 
 fs.writeFileSync('../remaining.json', JSON.stringify(remaining, null, '  '))
 
 console.log('Wrote to remaining.json')
+
+function findDups(arr){
+  var sorted_arr = arr.sort();
+  var results = [];
+  for (var i = 0; i < arr.length - 1; i++) {
+      if (sorted_arr[i + 1] == sorted_arr[i]) {
+          results.push(sorted_arr[i]);
+      }
+  }
+  return results;
+}
