@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 var pkgs = require('./all.json')
 
 console.log(pkgs.length)
