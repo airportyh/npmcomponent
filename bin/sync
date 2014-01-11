@@ -39,12 +39,10 @@ if (arg.match(/^[-_a-zA-Z0-9]+\.json$/)){
   syncAll(modules, syncOptions)
 }else if (arg.match(/^[-_a-zA-Z0-9]+\/[-_a-zA-Z0-9]+$/)){
   syncOne(arg, syncOptions)
-}else{
-  
 }
 
 function syncAll(modules, options){
-  async.eachSeries(modules, function(module, next){
+  async.eachLimit(modules, 10, function(module, next){
     syncModule(module, options, function(err){
       if (err) log.error('Failed to sync ' + module + ': ' + err.message)
       next()
