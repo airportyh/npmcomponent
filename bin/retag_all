@@ -1,12 +1,12 @@
 #! /usr/bin/env node
 
-var init = require('../lib/init_module')
 var assert = require('assert')
-var credentials = require('../credentials.json')
+var retagAll = require('../lib/retag_all_module')
 var Repo = require('../lib/repo')
 
 var repo = Repo(process.argv[2])
-init(credentials, repo, function(err){
+
+retagAll(repo, function(err){
   if (err) return console.error(err.message)
   console.log('ok')
 })

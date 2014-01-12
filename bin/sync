@@ -6,6 +6,7 @@ var async = require('async')
 var log = require('npmlog')
 var program = require('commander')
 var path = require('path')
+var Repo = require('../lib/repo')
 
 program
   .usage('[options] <repo or file>')
@@ -37,7 +38,7 @@ var syncOptions = {
 if (arg.match(/^[-_a-zA-Z0-9]+\.json$/)){
   var modules = require(path.join(process.cwd(), arg))
   syncAll(modules, syncOptions)
-}else if (arg.match(/^[-_a-zA-Z0-9]+\/[-_a-zA-Z0-9]+$/)){
+}else if (arg.match(/^[a-zA-Z0-9][a-zA-Z0-9\-]*\/[a-zA-Z0-9\-\_\.]+$/)){
   syncOne(arg, syncOptions)
 }
 
@@ -63,5 +64,6 @@ function syncOne(module, options){
 function syncModule(repo, options, callback){
   var user = repo.split('/')[0]
   var name = repo.split('/')[1]
-  sync(credentials, user, name, options, callback)
+  repo = Repo(user, name)
+  sync(credentials, repo, options, callback)
 }
