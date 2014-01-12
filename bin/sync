@@ -12,6 +12,7 @@ program
   .usage('[options] <repo or file>')
   .option('-s, --skip', 'Skip existing repos.')
   .option('-f, --force', 'Force sync on each repo even if no change.')
+  .option('-p, --parallel [num]', '# of parallel repos to sync at once', Number)
 
 program.on('--help', function(){
   console.log('  Examples:')
@@ -35,6 +36,9 @@ var syncOptions = {
   force: !!program.force
 }
 
+var parallel = program.parallel || 10
+console.log('Parallell workers', parallel)
+
 if (arg.match(/^[-_a-zA-Z0-9]+\.json$/)){
   var modules = require(path.join(process.cwd(), arg))
   syncAll(modules, syncOptions)
@@ -43,9 +47,9 @@ if (arg.match(/^[-_a-zA-Z0-9]+\.json$/)){
 }
 
 function syncAll(modules, options){
-  async.eachLimit(modules, 10, function(module, next){
+  async.eachLimit(modules, parallel, function(module, next){
     syncModule(module, options, function(err){
-      if (err) log.error('Failed to sync ' + module + ': ' + err.message)
+      if (err) log.error(module, 'failed to sync ' + module + ': ' + err.message)
       next()
     })
   }, function(err){
