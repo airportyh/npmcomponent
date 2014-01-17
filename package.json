@@ -15,7 +15,8 @@
     "request": "~2.31.0",
     "underscore": "~1.5.2",
     "getargs": "0.0.8",
-    "commander": "~2.1.0"
+    "commander": "~2.1.0",
+    "lodash.difference": "~2.4.1"
   },
   "devDependencies": {},
   "scripts": {

@@ -2,36 +2,26 @@
 
 var fs = require('fs')
 var assert = require('assert')
-var _ = require('underscore')
-var modules = require('../repos.json')
-  .map(function(m){
-    return {
-      name: m,
-      dirname: m.replace('/', '-').toLowerCase()
-    }
-  })
-
-console.log('# of repos', modules.length)
-
-var modEntries = modules.map(function(m){ return m.dirname })
-
+var diff = require('lodash.difference')
+var Repo = require('../lib/repo')
+var repos = require('../repos.json').map(function(repo){
+  return new Repo(repo)
+})
 var entries = fs.readdirSync('repos')
   .map(function(e){
     return e.toLowerCase()
   })
 
+var repoNames = repos.map(function(m){ return m.newName() })
+var remaining = diff(repoNames, entries)
+var removed = diff(entries, repoNames)
+
+console.log('# of repos', repos.length)
 console.log('# of cloned reps', entries.length)
-
-var remaining = []
-modules.forEach(function(module){
-  if (entries.indexOf(module.dirname) === -1){
-    remaining.push(module.name)
-  }
-})
-
+console.log('# of cloned repos removed from registry', removed.length)
 console.log('# of remaining packages:', remaining.length)
 
-assert(remaining.length === modules.length - entries.length)
+assert.equal(remaining.length, repos.length - entries.length + removed.length)
 
 var output = JSON.stringify(remaining, null, '  ')
 fs.writeFileSync('remaining.json', output)
