@@ -24,6 +24,9 @@ var removed = diff(entries, repoNames)
 console.log('# of repos', repos.length)
 console.log('# of cloned reps', entries.length)
 console.log('# of cloned repos removed from registry', removed.length)
+if (removed.length > 0){
+  console.log('removed repos:', removed)
+}
 console.log('# of remaining packages:', remaining.length)
 
 assert.equal(remaining.length, repos.length - entries.length + removed.length)
