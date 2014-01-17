@@ -13,7 +13,12 @@ var entries = fs.readdirSync('repos')
   })
 
 var repoNames = repos.map(function(m){ return m.newName() })
-var remaining = diff(repoNames, entries)
+var remaining = []
+repos.forEach(function(repo){
+  if (entries.indexOf(repo.newName()) === -1){
+    remaining.push(repo.originalName())
+  }
+})
 var removed = diff(entries, repoNames)
 
 console.log('# of repos', repos.length)
