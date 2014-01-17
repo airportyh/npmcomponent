@@ -2,7 +2,7 @@
 
 var fs = require('fs')
 var all = require('../all.json')
-var _ = require('underscore')
+var unique = require('lodash.uniq')
 var log = require('npmlog')
 
 var GitHubUrlExp = /https?:\/\/github\.com\/(.*)?$/
@@ -27,7 +27,7 @@ all.forEach(function(pkg){
   }
 })
 
-repos = _.uniq(repos)
+repos = unique(repos)
 
 repos.sort()
 
