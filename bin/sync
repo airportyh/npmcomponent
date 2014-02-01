@@ -36,7 +36,7 @@ var syncOptions = {
   force: !!program.force
 }
 
-var parallel = program.parallel || 10
+var parallel = program.parallel || 40
 
 if (arg.match(/^[-_a-zA-Z0-9]+\.json$/)){
   var modules = require(path.join(process.cwd(), arg))
