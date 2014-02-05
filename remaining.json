@@ -36,6 +36,7 @@
   "pluma/obs-models",
   "ramitos/abbr_numbernumeral.js",
   "segmentio/correct-email",
+  "sindresorhus/stringify-object",
   "timoxley/script-loader",
   "uniba/sound-manager-2",
   "visionmedia/css",
