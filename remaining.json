@@ -27,6 +27,7 @@
   "fs-components/qwery",
   "ftlabs/dom-delegate",
   "helplet/in-range",
+  "hydrajs/hydrajs.git",
   "jh3y/animate",
   "jkroso/text",
   "jwerle/observer",
