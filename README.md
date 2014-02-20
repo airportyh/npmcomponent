@@ -5,7 +5,7 @@ This project aims to make all 1700+ (and counting) modules in [Component](https:
 
 ## How?
 
-Each component from the [Component registry](https://github.com/component/component/wiki/Components) is mirrored in a separate Github repo - which is modified to work properly in the context of npm.
+Each component from the [Component registry](https://github.com/component/component/wiki/Components) is mirrored in a separate Github repo - which is modified to work properly in the context of npm/browserify.
 
 For example, to install [component/dialog](https://github.com/component/dialog) via npm, you'd do:
 
