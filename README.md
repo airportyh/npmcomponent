@@ -1,7 +1,7 @@
 NPM-Component
 =============
 
-This project aims to makes all 1700+ (and counting) modules in [Component](https://github.com/component/component/) available to [npm](https://www.npmjs.org/)/[browserify](http://browserify.org/) users - without the intervention of any of the modules' authors.
+This project aims to make all 1700+ (and counting) modules in [Component](https://github.com/component/component/) available to [npm](https://www.npmjs.org/)/[browserify](http://browserify.org/) users - without the intervention of any of the modules' authors.
 
 ## How?
 
