@@ -35,10 +35,10 @@ All scripts assume the existence of `credentials.json` which contains the "usern
 
 ## How often do you run these scripts?
 
-The plan is to setup a cron job on some machine to run them every hour or every 15 minutes. But, currently I run the scripts every day or so manually - very ghetto, I know. It takes ~1-2 minutes each time I run it.
+The plan is to setup a cron job on some machine to run them every hour or every 15 minutes. But, currently I run the scripts every day or so manually - very ghetto, I know. It takes about a minute each time I run it.
 
 ## Todo/Yet to be done
 
 * Version handling - currently the mirrors do not take versions into account - only HEAD is modified. I plan to add support by going through all the tags in each repo and modifying them.
-* Link back to existing npm modules - currently all repos are mirrored, even repos that were already publish on npm. I want to detect these cases and link to the npm package instead of the mirror in these cases.
+* Link back to existing npm modules - currently all repos are mirrored, even repos that were already publish on npm. I want to detect these cases and link to the npm package instead of the mirror.
 * Publish all mirrors on npm - I am still weighing the pros and cons of doing this.
