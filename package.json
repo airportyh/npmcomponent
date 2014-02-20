@@ -18,7 +18,8 @@
     "commander": "~2.1.0",
     "lodash.difference": "~2.4.1",
     "lodash.uniq": "~2.4.1",
-    "string-to-js": "0.0.1"
+    "string-to-js": "0.0.1",
+    "is-type": "0.0.1"
   },
   "devDependencies": {},
   "scripts": {
