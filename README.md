@@ -21,9 +21,9 @@ The main scripts of interest are
 
 * `bin/fetch` - this fetchs the `all.json` file from the server hosting the component registery.
 * `bin/gather` - goes through `all.json`, removes duplicates, sorts them, and saves to `repos.json`.
-* `bin/sync` - goes through repos.json and syncs each one from the original repo down to local, modifies it, and then syncs it back up to the corresponding repo on npmcomponent.
+* `bin/sync` - goes through repos.json and syncs each one from the original repo down to local, modifies it, and then syncs it back up to the corresponding repo on npmcomponent. There are also options you can set, see `bin/sync --help`.
 
-All scripts assume the existence of `credentials.json` which contains the "username" and "password" for the npmcomponent account, which are, of course, secret. The other scripts in the `bin` directory are used for quick/interactive testing.
+All scripts assume the existence of `credentials.json` which contains the "username" and "password" for the npmcomponent account, which are, of course, secret. You could run the scripts to create mirrors under your own user though if you wanted to. The other scripts in the `bin` directory are used for quick/interactive testing.
 
 * `bin/delete <username>/<repo>` - delete the mirrored of target repo.
 * `bin/delete_all` - delete all mirrors.
